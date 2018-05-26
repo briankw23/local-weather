@@ -5,7 +5,7 @@ const setKey = (keyy) => {
   console.error('key', key);
 };
 
-const objectRequest = () => {
+const objectRequestWeather = () => {
   return new Promise((resolve, reject) => {
     $.ajax(`api.openweathermap.org/data/2.5/weather?zip=37215,us&APPID=${key}`)
       .done((data) => {
@@ -18,7 +18,7 @@ const objectRequest = () => {
 };
 
 const objectRecieveWeather = () => {
-  objectRequest()
+  objectRequestWeather()
     .then((result) => {
       console.log(result);
     })
