@@ -1,3 +1,5 @@
-const initializar = require('./apiKeys');
+const apiKeys = require('./apiKeys');
+const owm = require('./owm');
 
-initializar();
+setTimeout(owm.objectRecieveWeather, 1000);
+apiKeys.initializer();

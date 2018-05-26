@@ -1,1 +1,33 @@
-// api.openweathermap.org/data/2.5/weather?zip=37215,us&APPID=9cbf30b045df4f1dddd850a20251afb4
+let key = '';
+
+const setKey = (keyy) => {
+  key = keyy;
+  console.error('key', key);
+};
+
+const objectRequest = () => {
+  return new Promise((resolve, reject) => {
+    $.ajax(`api.openweathermap.org/data/2.5/weather?zip=37215,us&APPID=${key}`)
+      .done((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const objectRecieveWeather = () => {
+  objectRequest()
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.error('something broke weather', error);
+    });
+};
+
+module.exports = {
+  objectRecieveWeather,
+  setKey,
+};
