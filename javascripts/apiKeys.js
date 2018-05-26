@@ -1,4 +1,9 @@
-const owm = require('./owm');
+let key = '';
+
+const setKey = (keyy) => {
+  key = keyy;
+  console.error('key', key);
+};
 
 const objectRequest = () => {
   return new Promise((resolve, reject) => {
@@ -6,8 +11,8 @@ const objectRequest = () => {
       .done((data) => {
         resolve(data.apiKeys);
       })
-      .fail((err) => {
-        reject(err);
+      .catch((error) => {
+        reject(error);
       });
   });
 };
@@ -15,12 +20,15 @@ const objectRequest = () => {
 const objectRecieve = () => {
   objectRequest()
     .then((result) => {
-      owm.setKey(result);
-      console.log(result);
+      setKey(result.owm.apiKey);
     })
-    .catch((err) => {
-      console.error('something broke', err);
+    .catch((error) => {
+      console.error('something broke', error);
     });
 };
 
-module.exports = objectRecieve;
+const initializer = () => {
+  objectRecieve();
+};
+
+module.exports = initializer;

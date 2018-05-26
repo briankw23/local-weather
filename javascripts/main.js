@@ -1,3 +1,3 @@
-const apiKeys = require('./apiKeys');
+const initializar = require('./apiKeys');
 
-apiKeys;
+initializar();
