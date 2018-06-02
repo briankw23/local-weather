@@ -1,33 +1,59 @@
+const dom = require('./dom');
+
 let key = '';
 
 const setKey = (keyy) => {
   key = keyy;
-  console.error('key', key);
 };
 
-const objectRequestWeather = () => {
+const objectRequestCurrentWeather = (zipCD) => {
   return new Promise((resolve, reject) => {
-    $.ajax(`api.openweathermap.org/data/2.5/weather?zip=37215,us&APPID=${key}`)
-      .done((data) => {
-        resolve(data);
+    $.ajax(`http://api.openweathermap.org/data/2.5/weather?zip=${zipCD},us&APPID=${key}&units=imperial`)
+      .done((results) => {
+        resolve(results);
       })
-      .catch((error) => {
-        reject(error);
+      .catch((err) => {
+        reject(err);
       });
   });
 };
 
-const objectRecieveWeather = () => {
-  objectRequestWeather()
-    .then((result) => {
-      console.log(result);
+const objectRecieveCurrentWeather = (zippy) => {
+  objectRequestCurrentWeather(zippy)
+    .then((results) => {
+      dom.domString(results,'weather');
     })
-    .catch((error) => {
-      console.error('something broke weather', error);
+    .catch((err) => {
+      console.error('something broke weather', err);
+    });
+};
+
+const objectRequestForecastWeather = (zipCD) => {
+  return new Promise((resolve, reject) => {
+    console.log(key);
+    console.log(zipCD);
+    $.ajax(`http://api.openweathermap.org/data/2.5/forecast?zip=${zipCD},us&APPID=${key}&units=imperial`)
+      .done((results) => {
+        resolve(results);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+const objectRecieveForecastWeather = (zippy) => {
+  objectRequestForecastWeather(zippy)
+    .then((results) => {
+      console.error('FORE', results);
+    })
+    .catch((err) => {
+      console.error('something broke weather', err);
     });
 };
 
 module.exports = {
-  objectRecieveWeather,
+  objectRecieveCurrentWeather,
+  objectRecieveForecastWeather,
   setKey,
 };

@@ -1,5 +1,5 @@
 const apiKeys = require('./apiKeys');
-const owm = require('./owm');
+const events = require('./events');
 
-owm.objectRecieveWeather
-apiKeys.initializer();
+apiKeys();
+events();

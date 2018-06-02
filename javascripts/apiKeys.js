@@ -1,6 +1,6 @@
 const owm = require('./owm');
 
-const objectRequest = () => {
+const objectRequestKey = () => {
   return new Promise((resolve, reject) => {
     $.ajax('./db/apiKeys.json')
       .done((data) => {
@@ -12,20 +12,14 @@ const objectRequest = () => {
   });
 };
 
-const objectRecieve = () => {
-  objectRequest()
+const objectRecieveKey = () => {
+  objectRequestKey()
     .then((result) => {
       owm.setKey(result.owm.apiKey);
     })
-    .catch((error) => {
-      console.error('something broke', error);
+    .catch((err) => {
+      console.error('something broke', err);
     });
 };
 
-const initializer = () => {
-  objectRecieve();
-};
-
-module.exports = {
-  initializer,
-};
+module.exports = objectRecieveKey;
