@@ -15,9 +15,9 @@ const pressEnter = () => {
 const foreButtons = () => {
   $(document).click((e) => {
     if (e.target.id === 'five') {
-      owm.objectRecieveForecastWeather(zip);
+      owm.objectRecieveForecastWeather(zip, 'five');
     } else if (e.target.id === 'three') {
-      owm.objectRecieveForecastWeather(zip);
+      owm.objectRecieveForecastWeather(zip, 'three');
     }
   });
 };
