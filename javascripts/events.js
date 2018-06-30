@@ -26,6 +26,8 @@ const foreButtons = () => {
 const saveForecastButton = () => {
   $(document).on('click','.saveForecast', (e) => {
     console.error(e);
+    // const locationDom = $(e.target.id).('.weatherLocation');
+    console.log(locationDom);
     const forecastToAdd = {
       location: 'testLocation',
       date: 'test date',
@@ -37,7 +39,6 @@ const saveForecastButton = () => {
     };
     firebaseApi.saveWeather(forecastToAdd)
       .then(() => {
-        // movieToAddCard.remove();
       })
       .catch((error) => {
         console.error('error in saving weather', error);

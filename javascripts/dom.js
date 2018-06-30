@@ -9,7 +9,6 @@ const domString = (weatherObject, whereToPrint) => {
   string += `<h4>Air pressure: ${weatherObject.main.pressure}</h4>`;
   string += `<h4>Wind Speed: ${weatherObject.wind.speed} MPH</h4>`;
   string += `<h4>Forecast:</h4>`;
-  string += `<button id="three" type="button" class="btn btn-default hide">3 - Day Forecast</button>`;
   string += `<button id="five" type="button" class="btn btn-default">5 - Day Forecast</button>`;
   string += `</div>`;
   string += `</div>`;
