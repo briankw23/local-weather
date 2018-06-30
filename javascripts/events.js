@@ -1,4 +1,5 @@
 const owm = require('./owm');
+const firebaseApi = require('./firebaseApi');
 
 let zip = '';
 
@@ -22,9 +23,32 @@ const foreButtons = () => {
   });
 };
 
+const saveForecastButton = () => {
+  $(document).on('click','.saveForecast', (e) => {
+    console.error(e);
+    const forecastToAdd = {
+      location: 'testLocation',
+      date: 'test date',
+      temperature: 'test temp',
+      conditions: 'test condtions',
+      airPressure: 'test press',
+      windSpeed: 'test wind',
+      isScary: false,
+    };
+    firebaseApi.saveWeather(forecastToAdd)
+      .then(() => {
+        // movieToAddCard.remove();
+      })
+      .catch((error) => {
+        console.error('error in saving weather', error);
+      });
+  });
+};
+
 const initializer = () => {
   pressEnter();
   foreButtons();
+  saveForecastButton();
 };
 
 module.exports = initializer;
