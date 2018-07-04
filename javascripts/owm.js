@@ -30,8 +30,6 @@ const objectRecieveCurrentWeather = (zippy) => {
 
 const objectRequestForecastWeather = (zipCD) => {
   return new Promise((resolve, reject) => {
-    console.log(key);
-    console.log(zipCD);
     $.ajax(`http://api.openweathermap.org/data/2.5/forecast?zip=${zipCD},us&APPID=${key}&units=imperial&`)
       .done((results) => {
         resolve(results);

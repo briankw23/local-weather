@@ -1,0 +1,13 @@
+{
+	"weather": {
+		"weather0": {
+			"location": "Knoxville",
+			"date": "06-12-1999",
+			"temperature": "99.99",
+			"conditions": "Clear",
+			"airPressure": "1000.07",
+			"windSpeed": "3.83",
+			"isScary": "False"
+		}
+	}
+}
