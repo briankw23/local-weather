@@ -9,7 +9,7 @@ const domString = (weatherObject, whereToPrint) => {
   string += `<h4>Air pressure: ${weatherObject.main.pressure}</h4>`;
   string += `<h4>Wind Speed: ${weatherObject.wind.speed} MPH</h4>`;
   string += `<h4>Forecast:</h4>`;
-  string += `<button id="five" type="button" class="btn btn-default">5 - Day Forecast</button>`;
+  string += `<button id="five" type="button" class="btn btn-danger">5 - Day Forecast</button>`;
   string += `</div>`;
   string += `</div>`;
   printToDom(whereToPrint, string);
@@ -24,7 +24,7 @@ const domStringForecast = (weatherObject, whereToPrint, days) => {
   forecastList = weatherObject.list;
   let string = '';
   string += `<div class="row">`;
-  string += `<div class="col-md-8 center-block">`;
+  string += `<div class="col-md-8 col-md-offset-2">`;
   string += `<table class="table table-striped table-bordered">`;
   string += `<tr class="text-center">`;
   string +=   `<th class="text-center">Location</th>`;
@@ -45,7 +45,7 @@ const domStringForecast = (weatherObject, whereToPrint, days) => {
     string +=   `<td class="weatherCond">${forecastList[i].weather[0].main}</td>`;
     string +=   `<td class="weatherAirPressure">${forecastList[i].main.pressure}</td>`;
     string +=   `<td class="weatherWindSpeed">${forecastList[i].wind.speed} MPH</td>`;
-    string +=   `<td><button id="${i + 1}" class="saveForecast">Save</button></td>`;
+    string +=   `<td><button id="${i + 1}" class="saveForecast btn btn-success">Save</button></td>`;
     string += `</tr>`;
     string += `</div>`;
   }
