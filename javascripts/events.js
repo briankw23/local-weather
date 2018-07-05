@@ -1,5 +1,6 @@
 const owm = require('./owm');
 const firebaseApi = require('./firebaseApi');
+const dom = require('./dom');
 
 let zip = '';
 
@@ -24,20 +25,21 @@ const foreButtons = () => {
 };
 
 const saveForecastButton = () => {
-  $(document).on('click','.saveForecast', (e) => {
+  $(document).on('click', '.saveForecast', (e) => {
+
     const domId = e.target.id;
+
     const locationDom = $(`.${domId}`).find('.weatherLocation').html();
-    console.log(locationDom);
+
     const dateDom = $(`.${domId}`).find('.weatherDate').html();;
-    console.log(dateDom);
+
     const temperatureDom = $(`.${domId}`).find('.weatherTemp').html();;;
-    console.log(temperatureDom);
+
     const conditionsDom = $(`.${domId}`).find('.weatherCond').html();;;
-    console.log(conditionsDom);
+
     const airPressureDom = $(`.${domId}`).find('.weatherAirPressure').html();;;
-    console.log(airPressureDom);
+
     const windSpeedDom = $(`.${domId}`).find('.weatherWindSpeed').html();;;
-    console.log(windSpeedDom);
 
     const forecastToAdd = {
       location: locationDom,
@@ -48,6 +50,7 @@ const saveForecastButton = () => {
       windSpeed: windSpeedDom,
       isScary: false,
     };
+
     firebaseApi.saveWeather(forecastToAdd)
       .then(() => {
       })
@@ -57,10 +60,25 @@ const saveForecastButton = () => {
   });
 };
 
+const myWeatherEvent = () => {
+  $(document).on('click', '#myWeather', (e) => {
+
+    firebaseApi.getWeather()
+      .then((weather) => {
+        console.log(weather);
+        dom.domStringMyWeather(weather, 'weatherSaved');
+      })
+      .catch((error) => {
+        console.error('cant get all weather', error);
+      });
+  });
+};
+
 const initializer = () => {
   pressEnter();
   foreButtons();
   saveForecastButton();
+  myWeatherEvent();
 };
 
 module.exports = initializer;
