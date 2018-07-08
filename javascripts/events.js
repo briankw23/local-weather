@@ -65,7 +65,6 @@ const myWeatherEvent = () => {
 
     firebaseApi.getWeather()
       .then((weather) => {
-        console.log(weather);
         dom.domStringMyWeather(weather, 'weatherSaved');
       })
       .catch((error) => {
@@ -76,7 +75,6 @@ const myWeatherEvent = () => {
 
 const updateScaryButton = () => {
   $(document).on('click', '.updateForecast', (e) => {
-    console.log(e);
 
     const domId = e.target.dataset['fireId'];
 
@@ -104,8 +102,6 @@ const updateScaryButton = () => {
       }
     };
     scary(scaryDom);
-    console.log(scaryy);
-    console.log(locationDom, dateDom, temperatureDom, conditionsDom, airPressureDom, windSpeedDom, scaryDom);
     const forecastToUpdate = {
       location: locationDom,
       date: dateDom,
@@ -120,7 +116,6 @@ const updateScaryButton = () => {
       .then(() => {
         firebaseApi.getWeather()
           .then((weather) => {
-            console.log(weather);
             dom.domStringMyWeather(weather, 'weatherSaved');
           })
           .catch((error) => {
