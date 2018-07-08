@@ -36,9 +36,27 @@ const getWeather = () => {
           });
         }
         resolve(allWeatherArray);
+        console.log(allWeatherArray);
       })
       .fail((error) => {
         reject(error);
+      });
+  });
+};
+
+const updateWeather = (weather, weatherId) => {
+
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      method: 'PUT',
+      url: `${firebaseConfig.databaseURL}/weather/${weatherId}.json`,
+      data: JSON.stringify(weather),
+    })
+      .done((scaryWeather) => {
+        resolve(scaryWeather);
+      })
+      .fail((error) => {
+        console.error(error);
       });
   });
 };
@@ -47,4 +65,5 @@ module.exports = {
   saveWeather,
   setConfig,
   getWeather,
+  updateWeather,
 };
