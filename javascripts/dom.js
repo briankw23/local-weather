@@ -72,15 +72,15 @@ const domStringMyWeather = (weatherArray, whereToPrint) => {
 
   for (let i = 0; i < weatherArray.length; i++) {
     string += `<div class="weatherRow">`;
-    string += `<tr class='${i + 1}'>`;
+    string += `<tr class='${weatherArray[i].id}'>`;
     string +=   `<td class="weatherLocation">${weatherArray[i].location}</td>`;
     string +=   `<td class="weatherDate">${weatherArray[i].date}</td>`;
     string +=   `<td class="weatherTemp">${weatherArray[i].temperature}</td>`;
     string +=   `<td class="weatherCond">${weatherArray[i].conditions}</td>`;
     string +=   `<td class="weatherAirPressure">${weatherArray[i].airPressure}</td>`;
     string +=   `<td class="weatherWindSpeed">${weatherArray[i].windSpeed}</td>`;
-    string +=   `<td><button id="${i + 1}" class="deleteForecast btn btn-danger btn-xs">Delete</button>`;
-    string +=   `<button id="${i + 1}" class="updateForecast btn btn-warning btn-xs">Update</button></td>`;
+    string +=   `<td><button id="${weatherArray[i].id}" data-fire-id="${weatherArray[i].id}" class="deleteForecast btn btn-danger btn-xs">Delete</button>`;
+    string +=   `<button id="${i + 1}" data-fire-id="${weatherArray[i].id}" data-scary="${weatherArray[i].isScary}"class="updateForecast weatherIsScary btn btn-warning btn-xs">${scary(weatherArray[i].isScary)}</button></td>`;
     string += `</tr>`;
     string += `</div>`;
   }
@@ -89,6 +89,10 @@ const domStringMyWeather = (weatherArray, whereToPrint) => {
   string += `</div>`;
 
   printToDom(whereToPrint, string);
+};
+
+const scary = (boo) => {
+  return (boo === true) ? 'Scary' : 'Not Scary';
 };
 
 module.exports = {

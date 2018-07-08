@@ -74,11 +74,71 @@ const myWeatherEvent = () => {
   });
 };
 
+const updateScaryButton = () => {
+  $(document).on('click', '.updateForecast', (e) => {
+    console.log(e);
+
+    const domId = e.target.dataset['fireId'];
+
+    const locationDom = $(`.${domId}`).find('.weatherLocation').html();
+
+    const dateDom = $(`.${domId}`).find('.weatherDate').html();;
+
+    const temperatureDom = $(`.${domId}`).find('.weatherTemp').html();;;
+
+    const conditionsDom = $(`.${domId}`).find('.weatherCond').html();;;
+
+    const airPressureDom = $(`.${domId}`).find('.weatherAirPressure').html();;;
+
+    const windSpeedDom = $(`.${domId}`).find('.weatherWindSpeed').html();;;
+
+    const scaryDom = $(`.${domId}`).find('.weatherIsScary').html();
+    let scaryy = false;
+    const scary = (boo) => {
+      if (boo === 'Not Scary') {
+        scaryy = true;
+      } else if (scaryDom === 'Scary') {
+        scaryy = false;
+      } else {
+        scaryy = false;
+      }
+    };
+    scary(scaryDom);
+    console.log(scaryy);
+    console.log(locationDom, dateDom, temperatureDom, conditionsDom, airPressureDom, windSpeedDom, scaryDom);
+    const forecastToUpdate = {
+      location: locationDom,
+      date: dateDom,
+      temperature: temperatureDom,
+      conditions: conditionsDom,
+      airPressure: airPressureDom,
+      windSpeed: windSpeedDom,
+      isScary: scaryy,
+    };
+
+    firebaseApi.updateWeather(forecastToUpdate, domId)
+      .then(() => {
+        firebaseApi.getWeather()
+          .then((weather) => {
+            console.log(weather);
+            dom.domStringMyWeather(weather, 'weatherSaved');
+          })
+          .catch((error) => {
+            console.error('cant get all weather', error);
+          });
+      })
+      .catch((error) => {
+        console.error('error in updating weather', error);
+      });
+  });
+};
+
 const initializer = () => {
   pressEnter();
   foreButtons();
   saveForecastButton();
   myWeatherEvent();
+  updateScaryButton();
 };
 
 module.exports = initializer;
