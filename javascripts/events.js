@@ -128,12 +128,32 @@ const updateScaryButton = () => {
   });
 };
 
+const deleteWeatherEvent = () => {
+  $(document).on('click', '.deleteForecast', (e) => {
+    const domId = e.target.dataset['fireId'];
+    firebaseApi.deleteWeather(domId)
+      .then(() => {
+        firebaseApi.getWeather()
+          .then((weather) => {
+            dom.domStringMyWeather(weather, 'weatherSaved');
+          })
+          .catch((error) => {
+            console.error('cant get all weather', error);
+          });
+      })
+      .catch((error) => {
+        console.error('error', error);
+      });
+  });
+};
+
 const initializer = () => {
   pressEnter();
   foreButtons();
   saveForecastButton();
   myWeatherEvent();
   updateScaryButton();
+  deleteWeatherEvent();
 };
 
 module.exports = initializer;
